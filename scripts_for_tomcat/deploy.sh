@@ -9,7 +9,7 @@ TOMCAT_WEBAPPS_DIR="/var/lib/tomcat/webapps"
 mkdir -p "$APP_DIR"
 
 # Clone your Java application repository
-git clone https://github.com/vitally-Kost/java-app.git "$APP_DIR/$SAPP_DIR"
+git clone https://github.com/Legamanchik/softserve_webapp.git "$APP_DIR/$SAPP_DIR"
 
 # Navigate to your app directory
 cd "$APP_DIR/$SAPP_DIR"
