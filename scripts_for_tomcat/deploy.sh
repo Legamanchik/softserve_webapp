@@ -15,7 +15,8 @@ git clone https://github.com/BlueTeam2/ClassSchedule "$APP_DIR/$SAPP_DIR"
 cd "$APP_DIR/$SAPP_DIR"
 
 # Build the project with Gradle
-./gradlew build test
+chmod +x ./gradlew
+./gradlew assemble
 
 # Stop the Tomcat service (if it's called toscato, adjust as needed)
 systemctl stop tomcat9.service
