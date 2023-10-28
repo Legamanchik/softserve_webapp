@@ -27,4 +27,4 @@ rm -rf "$TOMCAT_WEBAPPS_DIR/ROOT"
 cp build/libs/class-schedule.war "$TOMCAT_WEBAPPS_DIR/001.war"
 
 # Start the Tomcat service
-systemctl start tomcat
+systemctl start tomcat9
