@@ -11,14 +11,14 @@ fi
 sudo -u postgres psql -c "CREATE USER $POSTGRE_USER WITH PASSWORD '$POSTGRE_PASSWORD'"
 
 # Create a PostgreSQL database
-sudo -u postgres psql -c "CREATE DATABASE $DB_NAME WITH OWNER $POSTGRE_USER"
+sudo -u postgres createdb -O $POSTGRE_USER $DB_NAME
 
 # Set up the .pgpass file for password authentication
-echo "$DB_HOST:$DB_PORT:$DB_NAME:$POSTGRE_USER:$POSTGRE_PASSWORD" >> /var/lib/postgresql/.pgpass
-chmod 0600 /var/lib/postgresql/.pgpass
+echo "$DB_HOST:$DB_PORT:$DB_NAME:$POSTGRE_USER:$POSTGRE_PASSWORD" >> ~/.pgpass
+chmod 0600 ~/.pgpass
 
 # Copy the dump file to the PostgreSQL data directory
-cp "$DUMP_FILE" /var/lib/postgresql/
+cp "$DUMP_FILE" "/var/lib/postgresql/$DUMP_FILE"
 
 # Restore the dump file to the PostgreSQL database
-sudo -u postgres pg_restore -U $POSTGRE_USER -h $DB_HOST -d $DB_NAME -f "/var/lib/postgresql/$DUMP_FILE"
+sudo -u postgres pg_restore -U $POSTGRE_USER -h $DB_HOST -d $DB_NAME -Fc "/var/lib/postgresql/$DUMP_FILE"
