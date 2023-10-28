@@ -7,15 +7,22 @@ else
   exit 1
 fi
 
-# Create a PostgreSQL user
-sudo -Hiu postgres psql -c "CREATE USER $POSTGRE_USER WITH PASSWORD '$POSTGRE_PASSWORD'"
+# Configure PostgreSQL
+sudo -u postgres psql -c "CREATE DATABASE schedule;" \
+                      -c "CREATE DATABASE schedule_test;" \
+                      -c "CREATE USER $POSTGRES_USERNAME WITH PASSWORD '$POSTGRES_PASSWORD';" \
+                      -c "GRANT ALL PRIVILEGES ON DATABASE schedule TO $POSTGRES_USERNAME;" \
+                      -c "ALTER DATABASE schedule OWNER TO $POSTGRES_USERNAME;" \
+                      -c "GRANT ALL PRIVILEGES ON DATABASE schedule_test TO $POSTGRES_USERNAME;" \
+                      -c "ALTER DATABASE schedule_test OWNER TO $POSTGRES_USERNAME;" > /dev/null 2>&1
 
-# Create a PostgreSQL database
-sudo -Hiu postgres createdb -O $POSTGRE_USER $DB_NAME
+# Create .pgpass file
+sudo touch ".pgpass"
+echo "127.0.0.1:5432:*:$POSTGRES_USERNAME:$POSTGRES_PASSWORD" | sudo tee ".pgpass" > /dev/null
+sudo chmod 0600 ".pgpass"
+sudo chown postgres:postgres ".pgpass"
+echo PGPASSFILE=".pgpass" | sudo tee -a /etc/environment > /dev/null
 
-# Set up the .pgpass file for password authentication
-echo "$DB_HOST:$DB_PORT:$DB_NAME:$POSTGRE_USER:$POSTGRE_PASSWORD" >> ~/.pgpass
-chmod 0600 ~/.pgpass
-
-# Restore the dump file using psql
-sudo -Hiu postgres psql -U $POSTGRE_USER -d $DB_NAME < "$DUMP_FILE"
+# Restore dump
+sudo -u postgres psql --set ON_ERROR_STOP=off -U "$POSTGRES_USERNAME" -h 127.0.0.1 -d "$POSTGRES_DB" -f "$DUMP_FILE" > /dev/null 2>&1
+sudo systemctl restart postgresql
