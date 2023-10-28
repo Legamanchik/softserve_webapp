@@ -25,7 +25,7 @@ systemctl stop tomcat9.service
 rm -rf "$TOMCAT_WEBAPPS_DIR/ROOT"
 
 # Copy your application WAR file to Tomcat's webapps directory
-cp build/libs/class-schedule.war "$TOMCAT_WEBAPPS_DIR/ROOT.war"
+cp build/libs/class_schedule.war "$TOMCAT_WEBAPPS_DIR/ROOT.war"
 
 #setenv for tomcat
 cp .env /usr/share/tomcat9/bin/
