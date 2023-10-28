@@ -11,6 +11,12 @@ mkdir -p "$APP_DIR"
 # Clone your Java application repository
 git clone https://github.com/BlueTeam2/ClassSchedule "$APP_DIR/$SAPP_DIR"
 
+#setenv for tomcat
+cp .env /usr/share/tomcat9/bin/
+cd /usr/share/tomcat9/bin/
+mv .env setenv.sh
+chmod +x setenv.sh
+
 # Navigate to your app directory
 cd "$APP_DIR/$SAPP_DIR"
 
@@ -27,11 +33,6 @@ rm -rf "$TOMCAT_WEBAPPS_DIR/ROOT"
 # Copy your application WAR file to Tomcat's webapps directory
 cp build/libs/class_schedule.war "$TOMCAT_WEBAPPS_DIR/ROOT.war"
 
-#setenv for tomcat
-cp .env /usr/share/tomcat9/bin/
-cd /usr/share/tomcat9/bin/
-mv .env setenv.sh
-chmod +x setenv.sh
 
 # Start the Tomcat service
 systemctl start tomcat9.service  
