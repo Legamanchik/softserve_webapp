@@ -3,7 +3,7 @@
 # Define your variables
 APP_DIR="/root/projects/java-app"
 SAPP_DIR="ClassSchedule" # or the name of the directory you want
-TOMCAT_WEBAPPS_DIR="/var/lib/tomcat/webapps"
+TOMCAT_WEBAPPS_DIR="/var/lib/tomcat9/webapps"
 
 # Create a directory for your app
 mkdir -p "$APP_DIR"
