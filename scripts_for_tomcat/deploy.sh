@@ -18,7 +18,7 @@ cd "$APP_DIR/$SAPP_DIR"
 ./gradlew build test
 
 # Stop the Tomcat service (if it's called toscato, adjust as needed)
-systemctl stop tomcat
+systemctl stop tomcat9.service
 
 # Remove existing ROOT application
 rm -rf "$TOMCAT_WEBAPPS_DIR/ROOT"
