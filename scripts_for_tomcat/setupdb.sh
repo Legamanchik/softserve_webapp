@@ -26,7 +26,6 @@ echo PGPASSFILE=".pgpass" | sudo tee -a /etc/environment > /dev/null
 # Restore dump
 
 sudo cp 2023-09-07.dump /tmp/init.dump
-sudo -u postgres psql --set ON_ERROR_STOP=off -d schedule -f "/tmp/init.dump"
-sudo -u postgres psql --set ON_ERROR_STOP=off -d schedule -f "/tmp/init.dump"
+
 
 sudo systemctl restart postgresql
