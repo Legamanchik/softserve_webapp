@@ -1,4 +1,5 @@
 # softserve_webapp
 ./install.sh
-./setupdb
-./deploy
+./setupdb.sh
+./deploy.sh
+./restore.sh
