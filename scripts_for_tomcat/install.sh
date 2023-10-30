@@ -23,7 +23,7 @@ sdk install gradle 7.3.3
 #start tools on boot
 sudo systemctl enable postgresql
 sudo systemctl enable redis-server
-sudo systemctl enable tomcat8
+sudo systemctl enable tomcat9.service
 sudo systemctl enable mongod
 
 
