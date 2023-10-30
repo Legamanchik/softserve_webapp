@@ -37,5 +37,3 @@ cp build/libs/class_schedule.war "$TOMCAT_WEBAPPS_DIR/ROOT.war"
 # Start the Tomcat service
 systemctl start tomcat9.service  
 
-sudo -u postgres psql --set ON_ERROR_STOP=off -d schedule -f "/tmp/init.dump"
-sudo -u postgres psql --set ON_ERROR_STOP=off -d schedule -f "/tmp/init.dump"
